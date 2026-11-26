@@ -56,6 +56,7 @@
   --color-error: var(--error);
   --color-error-foreground: var(--error-foreground);
   --color-border: var(--border);
+  --color-control-border: var(--control-border);
   --color-input: var(--input);
   --color-outline: var(--outline);
 
@@ -104,6 +105,7 @@
   --error: var(--color-red-700);
   --error-foreground: var(--color-stone-50);
   --border: var(--color-stone-200);
+  --control-border: var(--color-stone-500);
   --input: var(--color-stone-200);
   --outline: var(--color-teal-600);
   --radius: 0.75rem;
@@ -144,7 +146,8 @@
   --warning-foreground: var(--color-amber-950);
   --error: var(--color-red-800);
   --error-foreground: var(--color-stone-50);
-  --border: --alpha(var(--color-stone-50) / 11%);
+  --border: --alpha(var(--color-stone-50) / 15%);
+  --control-border: --alpha(var(--color-stone-50) / 20%);
   --input: --alpha(var(--color-stone-50) / 15%);
   --outline: var(--color-teal-400);
 
@@ -160,12 +163,25 @@
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 
   * {
-    @apply border-border outline-outline/50;
+    @apply border-border outline-outline;
   }
 
   body {
@@ -201,7 +217,7 @@
   }
 
   .prose-portfolio a {
-    @apply font-medium text-primary-accent underline decoration-primary-accent/40 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary;
+    @apply rounded-xs font-medium text-primary-accent underline decoration-primary-accent/70 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
 
   .prose-portfolio strong {

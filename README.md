@@ -2,8 +2,6 @@
 
 Personal portfolio and project showcase for **Francisco Gonzalez IV**, a software engineer based in Richmond, VA.
 
-Live site: [https://worker.franciscogonzaleziv.com](https://worker.franciscogonzaleziv.com)
-
 ## Tech Stack
 
 - **Framework**: [Astro 7](https://astro.build/) (Static Site Generation + Content Layer API)
@@ -13,7 +11,7 @@ Live site: [https://worker.franciscogonzaleziv.com](https://worker.franciscogonz
 
 ## Prerequisites
 
-- **Node.js `>= 22.23.4`** (required by Astro 7) and npm (or Deno via `deno.json`)
+- **Node.js `>= 22.23.4`** (required by Astro 7; CI runs Node 24) and npm
 
 ## Getting Started
 
@@ -38,9 +36,9 @@ npm run preview:worker
 
 ```text
 ├── .github/workflows/deploy.yml   # Cloudflare Workers CI/CD
-├── public/                        # Static files (favicon, OG images, animated GIFs)
+├── public/                        # Static files (favicon, unoptimized Markdown media like GIFs)
 ├── src/
-│   ├── assets/images/             # Raster images optimized to responsive WebP via Astro <Image />
+│   ├── assets/images/             # Raster images optimized via Astro <Image /> & OG getImage()
 │   ├── components/
 │   │   ├── starwind/              # Source-owned Starwind UI components
 │   │   ├── ProjectCard.astro      # Mobile-first project card (grid & list variants)
@@ -53,7 +51,7 @@ npm run preview:worker
 │   ├── lib/images.ts              # Image asset & tag formatting helpers
 │   ├── pages/                     # Routes (/, /projects/, /about/, /posts/<id>/, /404.html, RSS, sitemap, robots)
 │   └── styles/starwind.css        # Tailwind v4 entrypoint & Stone/Pine-Teal theme tokens
-├── astro.config.mjs               # Astro + @tailwindcss/vite config
+├── astro.config.mjs               # Astro + @tailwindcss/vite config (uses SITE_URL env var)
 ├── starwind.config.json           # Starwind CLI config
 ├── tsconfig.json                  # TypeScript strict config (@/* -> ./src/*)
 └── wrangler.json                  # Cloudflare Workers static assets config
@@ -69,6 +67,7 @@ Create a Markdown file in `src/content/blog/` with the following frontmatter:
 ---
 title: "Project Title"
 date: "2024-01-01"
+role: "Freelance Web Developer"
 tags: ["small-business", "javascript", "web-development"]
 description: "Brief summary of the project."
 screen: "images/screenshot.png"
@@ -78,8 +77,9 @@ order: 1
 Project details in Markdown...
 ```
 
-- Place raster screenshots in both `src/assets/images/` (for responsive WebP optimization) and `public/images/` (for Open Graph metadata). Animated GIFs belong in `public/images/`.
-- Projects are ordered ascending by `order`.
+- Place raster screenshots in `src/assets/images/`. Astro automatically optimizes them to responsive WebP on pages and 1200px JPEG for Open Graph metadata.
+- Place unoptimized Markdown media (such as animated GIFs and their static `prefers-reduced-motion` fallbacks) in `public/images/`.
+- Projects are ordered ascending by `order`. `date` is used for RSS metadata and is not displayed in project headers.
 
 ### Site Metadata (`src/data/site.json`)
 
@@ -93,12 +93,16 @@ npx starwind@latest add <component-name>
 
 ## Deployment
 
-Production deployments run automatically via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) on pushes to `main` or `master` (requiring `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets).
+Production deployments run automatically via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) on pushes to `main` or `master` (or manually via `workflow_dispatch`), requiring the following repository secrets:
 
-To deploy manually with Wrangler:
+- `SITE_URL` — Canonical site origin used for `<link rel="canonical">`, Open Graph URLs, `sitemap.xml`, `robots.txt`, and `feed.xml` (defaults to `http://localhost:4321` locally)
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+
+To build and deploy manually with Wrangler:
 
 ```bash
-npm run deploy
+SITE_URL=https://example.com npm run deploy
 ```
 
 ## License

@@ -105,7 +105,9 @@ const socialImage = optimizedImage ?? (screen ? `/${screen.replace(/^\/+/, "")}`
               <span class="size-2.5 rounded-full bg-border" />
             </div>
 
-            <span class="truncate font-mono text-xs text-muted-foreground">{title}</span>
+            <span aria-hidden="true" class="truncate font-mono text-xs text-muted-foreground">
+              {title}
+            </span>
 
             <div class="w-10" aria-hidden="true" />
           </div>
@@ -144,7 +146,7 @@ const socialImage = optimizedImage ?? (screen ? `/${screen.replace(/^\/+/, "")}`
 
     {
       (nextPost || previousPost) && (
-        <aside class="mt-12">
+        <div class="mt-12">
           <Separator class="mb-8" />
 
           <nav aria-label="Project pagination" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -196,7 +198,7 @@ const socialImage = optimizedImage ?? (screen ? `/${screen.replace(/^\/+/, "")}`
               </a>
             )}
           </nav>
-        </aside>
+        </div>
       )
     }
   </article>
