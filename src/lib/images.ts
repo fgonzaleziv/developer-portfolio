@@ -33,6 +33,9 @@ export function formatTag(tag: string): string {
     liquid: "Liquid",
     "static-site": "Static Site",
     "deno-deploy": "Deno Deploy",
+    astro: "Astro",
+    eleventy: "Eleventy",
+    "cloudflare-workers": "Cloudflare Workers",
     "ui-customization": "UI Customization",
     "mobile-first": "Mobile-First",
   };

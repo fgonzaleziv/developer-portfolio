@@ -38,7 +38,7 @@ export interface Props {
 const { title, role, tags = [], description, screen, nextPost, previousPost } = Astro.props;
 
 const optimizedImage = resolvePortfolioImage(screen);
-const socialImage = screen ? `/${screen.replace(/^\/+/, "")}` : undefined;
+const socialImage = optimizedImage ?? (screen ? `/${screen.replace(/^\/+/, "")}` : undefined);
 ---
 
 <BaseLayout title={title} description={description} socialImage={socialImage}>

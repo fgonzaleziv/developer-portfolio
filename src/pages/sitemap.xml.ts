@@ -1,12 +1,11 @@
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
-import site from '../data/site.json';
 
 export async function GET(context: APIContext) {
   const posts = await getCollection('blog');
   posts.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
-  const siteUrl = context.site ? context.site.href.replace(/\/+$/, '') : site.url.replace(/\/+$/, '');
+  const siteUrl = (context.site?.href ?? 'http://localhost:4321').replace(/\/+$/, '');
   const staticPages = ['', 'projects/', 'about/'];
 
   const urls = [

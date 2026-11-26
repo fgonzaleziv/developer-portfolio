@@ -10,7 +10,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: site.name,
     description: site.description,
-    site: context.site || site.url,
+    site: context.site ?? 'http://localhost:4321',
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: new Date(post.data.date),

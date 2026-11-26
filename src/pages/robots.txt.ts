@@ -1,8 +1,7 @@
 import type { APIContext } from 'astro';
-import site from '../data/site.json';
 
 export async function GET(context: APIContext) {
-  const siteUrl = context.site ? context.site.href.replace(/\/+$/, '') : site.url.replace(/\/+$/, '');
+  const siteUrl = (context.site?.href ?? 'http://localhost:4321').replace(/\/+$/, '');
   const robotsTxt = `User-agent: *\nSitemap: ${siteUrl}/sitemap.xml\n`;
   return new Response(robotsTxt, {
     headers: {
