@@ -67,6 +67,7 @@ const extraLinks = [...(site.socialLinks ?? []), ...(site.footerLinks ?? [])];
                 ]}
               >
                 {item.text}
+                {item.external && <span class="sr-only"> (opens in a new tab)</span>}
               </a>
             );
           })
@@ -74,13 +75,13 @@ const extraLinks = [...(site.socialLinks ?? []), ...(site.footerLinks ?? [])];
       </nav>
 
       <div class="ml-2 pl-2 border-l border-border/80">
-        <ThemeToggle variant="ghost" size="sm" ariaLabel="Toggle color theme" />
+        <ThemeToggle variant="default" size="sm" ariaLabel="Toggle color theme" />
       </div>
     </div>
 
     {/* Mobile navigation actions */}
     <div class="flex items-center gap-1.5 md:hidden">
-      <ThemeToggle variant="ghost" size="md" ariaLabel="Toggle color theme" />
+      <ThemeToggle variant="default" size="md" ariaLabel="Toggle color theme" />
 
       <Sheet>
         <SheetTrigger asChild>
@@ -89,7 +90,11 @@ const extraLinks = [...(site.socialLinks ?? []), ...(site.footerLinks ?? [])];
           </Button>
         </SheetTrigger>
 
-        <SheetContent side="right" class="flex flex-col justify-between p-0 sm:max-w-xs">
+        <SheetContent
+          side="right"
+          closeLabel="Close navigation menu"
+          class="flex flex-col justify-between p-0 sm:max-w-xs"
+        >
           <div>
             <SheetHeader class="border-b border-border/80 px-6 py-5 text-left">
               <SheetTitle class="text-base font-semibold tracking-tight">
@@ -100,12 +105,12 @@ const extraLinks = [...(site.socialLinks ?? []), ...(site.footerLinks ?? [])];
               </SheetDescription>
             </SheetHeader>
 
-            <nav aria-label="Mobile navigation" class="flex flex-col gap-1.5 p-4">
+            <nav aria-label="Mobile" class="flex flex-col gap-1.5 p-4">
               <a
                 href="/"
                 aria-current={isCurrentRoute("/") ? "page" : undefined}
                 class:list={[
-                  "flex min-h-12 items-center rounded-lg px-4 text-base font-medium transition-colors",
+                  "flex min-h-12 items-center rounded-lg px-4 text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline",
                   isCurrentRoute("/")
                     ? "bg-accent text-accent-foreground"
                     : "text-foreground/85 hover:bg-muted hover:text-foreground",
@@ -124,13 +129,14 @@ const extraLinks = [...(site.socialLinks ?? []), ...(site.footerLinks ?? [])];
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noopener noreferrer" : undefined}
                       class:list={[
-                        "flex min-h-12 items-center rounded-lg px-4 text-base font-medium transition-colors",
+                        "flex min-h-12 items-center rounded-lg px-4 text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline",
                         active
                           ? "bg-accent text-accent-foreground"
                           : "text-foreground/85 hover:bg-muted hover:text-foreground",
                       ]}
                     >
                       {item.text}
+                      {item.external && <span class="sr-only"> (opens in a new tab)</span>}
                     </a>
                   );
                 })
@@ -152,12 +158,15 @@ const extraLinks = [...(site.socialLinks ?? []), ...(site.footerLinks ?? [])];
                         size="sm"
                         target={item.external ? "_blank" : undefined}
                         rel={item.external ? "noopener noreferrer" : undefined}
-                        class="flex-1"
+                        class="min-h-11 flex-1"
                       >
                         {lower === "github" && <BrandGithub class="size-4" aria-hidden="true" />}
                         {lower === "linkedin" && <BrandLinkedin class="size-4" aria-hidden="true" />}
                         {lower === "rss" && <Rss class="size-4" aria-hidden="true" />}
-                        <span>{item.text}</span>
+                        <span>
+                          {item.text}
+                          {item.external && <span class="sr-only"> (opens in a new tab)</span>}
+                        </span>
                       </Button>
                     );
                   })}

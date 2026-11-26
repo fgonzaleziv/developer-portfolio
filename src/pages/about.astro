@@ -56,7 +56,9 @@ const linkedinLink = profileLinks.find((link) => link.text.toLowerCase() === "li
           I'm Francisco, a software engineer based in Richmond, VA specializing in web-based
           solutions. Through my work, I aim to make a positive impact on the world. That's why I
           currently work at{" "}
-          <a href="https://unos.org/" target="_blank" rel="noopener noreferrer">UNOS</a>, expanding
+          <a href="https://unos.org/" target="_blank" rel="noopener noreferrer"
+            >UNOS<span class="sr-only"> (opens in a new tab)</span></a
+          >, expanding
           and improving enterprise software that helps match organ donors to recipients.
         </p>
 
@@ -88,7 +90,7 @@ const linkedinLink = profileLinks.find((link) => link.text.toLowerCase() === "li
                 class="no-underline!"
               >
                 <BrandGithub class="size-4" aria-hidden="true" />
-                <span>GitHub</span>
+                <span>GitHub<span class="sr-only"> (opens in a new tab)</span></span>
               </Button>
             )
           }
@@ -104,7 +106,7 @@ const linkedinLink = profileLinks.find((link) => link.text.toLowerCase() === "li
                 class="no-underline!"
               >
                 <BrandLinkedin class="size-4" aria-hidden="true" />
-                <span>LinkedIn</span>
+                <span>LinkedIn<span class="sr-only"> (opens in a new tab)</span></span>
               </Button>
             )
           }

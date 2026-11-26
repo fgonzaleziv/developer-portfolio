@@ -36,7 +36,10 @@ const links = [...(site.socialLinks ?? []), ...(site.footerLinks ?? [])];
                     {lower === "github" && <BrandGithub class="size-4" aria-hidden="true" />}
                     {lower === "linkedin" && <BrandLinkedin class="size-4" aria-hidden="true" />}
                     {lower === "rss" && <Rss class="size-4" aria-hidden="true" />}
-                    <span>{item.text}</span>
+                    <span>
+                      {item.text}
+                      {item.external && <span class="sr-only"> (opens in a new tab)</span>}
+                    </span>
                   </a>
                 </li>
               );
@@ -54,9 +57,9 @@ const links = [...(site.socialLinks ?? []), ...(site.footerLinks ?? [])];
             href="https://astro.build"
             target="_blank"
             rel="noopener noreferrer"
-            class="underline underline-offset-4 hover:text-foreground"
+            class="rounded-xs underline underline-offset-4 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline"
           >
-            Astro
+            Astro<span class="sr-only"> (opens in a new tab)</span>
           </a>
         </p>
       )

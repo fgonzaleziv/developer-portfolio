@@ -18,4 +18,7 @@ Circle Square Hair Salon wanted clearer service pricing breakdowns inside Square
 
 Worked within Squarespace's constraints to add custom JavaScript behavior and new pages alongside the existing theme.
 
-![Tooltip utilizing popper.js](/images/circle-square-popover.gif)
+<picture>
+  <source srcset="/images/circle-square-popover-static.png" media="(prefers-reduced-motion: reduce)" />
+  <img src="/images/circle-square-popover.gif" alt="Tooltip utilizing Popper.js showing service pricing breakdown" loading="lazy" decoding="async" />
+</picture>

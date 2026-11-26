@@ -9,10 +9,15 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   <section class="flex min-h-[55dvh] items-center justify-center py-12 sm:py-20">
     <Card class="w-full max-w-md text-center shadow-sm">
       <CardHeader class="items-center gap-2">
-        <p class="font-mono text-6xl font-bold tracking-tight text-primary-accent sm:text-7xl">
+        <p
+          aria-hidden="true"
+          class="font-mono text-6xl font-bold tracking-tight text-primary-accent sm:text-7xl"
+        >
           404
         </p>
-        <h1 class="text-2xl font-semibold tracking-tight text-card-foreground">Page not found</h1>
+        <h1 class="text-2xl font-semibold tracking-tight text-card-foreground">
+          <span class="sr-only">404: </span>Page not found
+        </h1>
         <CardDescription>
           The link you followed may be broken or moved.
         </CardDescription>

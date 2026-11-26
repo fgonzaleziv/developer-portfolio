@@ -29,7 +29,7 @@ const { title, posts } = Astro.props;
       </Badge>
 
       <div
-        class="[&>h1]:text-4xl [&>h1]:font-bold [&>h1]:tracking-tight [&>h1]:text-foreground sm:[&>h1]:text-5xl lg:[&>h1]:text-6xl [&>p]:mt-5 [&>p]:max-w-2xl [&>p]:text-lg [&>p]:leading-relaxed [&>p]:text-muted-foreground sm:[&>p]:text-xl [&_a]:font-medium [&_a]:text-primary-accent [&_a]:underline [&_a]:decoration-primary-accent/40 [&_a]:underline-offset-4 [&_a]:transition-colors hover:[&_a]:text-primary hover:[&_a]:decoration-primary"
+        class="[&>h1]:text-4xl [&>h1]:font-bold [&>h1]:tracking-tight [&>h1]:text-foreground sm:[&>h1]:text-5xl lg:[&>h1]:text-6xl [&>p]:mt-5 [&>p]:max-w-2xl [&>p]:text-lg [&>p]:leading-relaxed [&>p]:text-muted-foreground sm:[&>p]:text-xl [&_a]:rounded-xs [&_a]:font-medium [&_a]:text-primary-accent [&_a]:underline [&_a]:decoration-primary-accent/70 [&_a]:underline-offset-4 [&_a]:transition-colors hover:[&_a]:text-primary hover:[&_a]:decoration-primary focus-visible:[&_a]:outline-none focus-visible:[&_a]:ring-2 focus-visible:[&_a]:ring-outline focus-visible:[&_a]:ring-offset-2 focus-visible:[&_a]:ring-offset-background"
       >
         <slot />
       </div>
@@ -61,7 +61,10 @@ const { title, posts } = Astro.props;
                   >
                     {lower === "github" && <BrandGithub class="size-4" aria-hidden="true" />}
                     {lower === "linkedin" && <BrandLinkedin class="size-4" aria-hidden="true" />}
-                    <span>{item.text}</span>
+                    <span>
+                      {item.text}
+                      {item.external && <span class="sr-only"> (opens in a new tab)</span>}
+                    </span>
                   </a>
                 </li>
               );
@@ -85,7 +88,7 @@ const { title, posts } = Astro.props;
         </p>
       </div>
 
-      <Button href="/projects/" variant="ghost" size="sm" class="text-primary-accent">
+      <Button href="/projects/" variant="ghost" size="sm" class="min-h-11 text-primary-accent sm:min-h-9">
         <span>All projects</span>
         <ArrowRight class="size-4" aria-hidden="true" />
       </Button>
